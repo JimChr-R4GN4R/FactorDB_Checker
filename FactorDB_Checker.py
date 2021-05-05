@@ -29,3 +29,16 @@ def status_check_factorDB(n):
 			print("Status: Added  to database during this request\n")
 	else:
 		print("Status code:",str(s.status_code))
+
+while 1:
+
+	n = input("Number: ")
+
+	if n == "":
+		break
+	else:
+		try:
+			n = int(n)
+			status_check_factorDB(n)
+		except ValueError:
+			print("[!] Please give an integer")
