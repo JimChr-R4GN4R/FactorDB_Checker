@@ -31,9 +31,7 @@ def status_check_factorDB(n):
 		print("Status code:",str(s.status_code))
 
 while 1:
-
 	n = input("Number: ")
-
 	if n == "":
 		break
 	else:
