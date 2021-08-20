@@ -8,7 +8,7 @@ def status_check_factorDB(n):
 	if s.status_code == 200:
 		results = BeautifulSoup(s.text, "lxml").text
 		results = results.replace('\n\nfactordb.com\n\n\nSearch\nSequences\nReport results\nFactor tables\nStatus\nDownloads\nLogin\n\n\n\n\n\n\nResult:\nstatus (?)\ndigits\nnumber\n','').replace('\n\n','').split('\n')
-
+		results[0] = results[0].replace('*','')
 		if "C" == results[0]:
 			print("Status: Composite, no factors known\n")
 		elif "CF" == results[0]:
@@ -25,8 +25,6 @@ def status_check_factorDB(n):
 			print("Status: Just for '1'\n")
 		elif "N" == results[0]:
 			print("Status: This number is not in database (and was not added due to your setting\ns)\n")
-		elif "*" == results[0]:
-			print("Status: Added  to database during this request\n")
 	else:
 		print("Status code:",str(s.status_code))
 
