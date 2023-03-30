@@ -47,4 +47,4 @@ while 1:
 	if n == "":
 		break
 	else:
-		factordb(n)
+		print(factordb(n))
