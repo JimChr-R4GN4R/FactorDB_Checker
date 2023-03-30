@@ -1,5 +1,5 @@
 # FactorDB_Checker
-This is a script from a library I am working on (don't know when it will be published to keep you hyped :P) that helps you check fast if a number n is composite or not from FactorDB.
+This is a script from a library I am working on (don't know when it will be published to keep you hyped :P) that helps you check fast if a number n is composite or not with the help of FactorDB.
 
 # Preparation
 - Install requests: `pip3 install requests`
