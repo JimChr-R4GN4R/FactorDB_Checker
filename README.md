@@ -2,8 +2,6 @@
 This is a script that helps you check fast if a number n is composite or not from FactorDB.
 
 # Preparation
-- Install BeautifulSoup4: `pip3 install beautifulsoup4`
-
 - Install requests: `pip3 install requests`
 
 - Done!
@@ -11,4 +9,4 @@ This is a script that helps you check fast if a number n is composite or not fro
 # Execution
 `python3 FactorDB_Checker.py`
 
-![image](https://user-images.githubusercontent.com/59511698/117198506-c8a65680-adf1-11eb-8711-ade216794aa0.png)
+![image](https://user-images.githubusercontent.com/59511698/228971017-6f6e4865-c9ae-4be5-98d1-8a1d54cf7fde.png)
