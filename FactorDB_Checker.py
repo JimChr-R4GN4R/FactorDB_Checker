@@ -1,40 +1,50 @@
-import requests
-from bs4 import BeautifulSoup
+from requests import get
+import re
+def factordb(n: int):
+	"""
+	n (int) - required: Number to be factored.
+	"""
+	
+	try:
+		int(n)
+	except ValueError:
+		return ValueError("n must be integer.")
 
+	def FindNumberById(id):
+		try:
+			res = get(f'http://factordb.com/index.php?id={str(id)}').text
+		except Exception as e:
+			return e
 
-def status_check_factorDB(n):
-	s = requests.get('http://factordb.com/index.php?query='+str(n))
+		try:
+			return int(re.findall(r'<input type="text" size=100 name="query" value="(.*)">\n<input type="submit" value="Factorize!">', res)[0])
+		except ValueError:
+			try:
+				return simple_eval(re.findall(r'<input type="text" size=100 name="query" value="(.*)">\n<input type="submit" value="Factorize!">', res)[0].replace('^','**').replace('/','//'))
+			except SyntaxError:
+				return None
+		return None
+	
+	try:
+		res = get(f'http://factordb.com/index.php?query={str(n)}').text
+	except Exception as e:
+		return e
 
-	if s.status_code == 200:
-		results = BeautifulSoup(s.text, "lxml").text
-		results = results.replace('\n\nfactordb.com\n\n\nSearch\nSequences\nReport results\nFactor tables\nStatus\nDownloads\nLogin\n\n\n\n\n\n\nResult:\nstatus (?)\ndigits\nnumber\n','').replace('\n\n','').split('\n')
-		results[0] = results[0].replace('*','')
-		if "C" == results[0]:
-			print("Status: Composite, no factors known\n")
-		elif "CF" == results[0]:
-			print("Status: Composite, factors known\n" + results[2])
-		elif "FF" == results[0]:
-			print("Status: Composite, fully factored\nFactors: " + results[2])
-		elif "P" == results[0]:
-			print("Status: Definitely prime\n")
-		elif "Prp" == results[0]:
-			print("Status: Probably prime\n")
-		elif "U" == results[0]:
-			print("Status: Unknown\n")
-		elif "Unit" == results[0]:
-			print("Status: Just for '1'\n")
-		elif "N" == results[0]:
-			print("Status: This number is not in database (and was not added due to your setting\ns)\n")
+	factors = re.findall(r'"index\.php\?id=([0-9]*)">', res)
+
+	if len(factors) == 0:
+		return None
+	elif (factors[0] == factors[1]):
+		return [1,n]
 	else:
-		print("Status code:",str(s.status_code))
+		factors.pop(0)
+		for i in range(len(factors)):
+			factors[i] = FindNumberById(factors[i])
+		return factors
 
 while 1:
 	n = input("Number: ")
 	if n == "":
 		break
 	else:
-		try:
-			n = int(n)
-			status_check_factorDB(n)
-		except ValueError:
-			print("[!] Please give an integer")
+		factordb(n)
