@@ -4,6 +4,8 @@ This is a script from a library I am working on (don't know when it will be publ
 # Preparation
 - Install requests: `pip3 install requests`
 
+- Install simpleeval: `pip3 install simpleeval`
+
 - Done!
 
 # Execution
